@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+</head>
+<body>
+    <h1>
+        {{#if user }}
+            Update user screen
+        {{else}}
+            Add new user screen
+        {{/if}}
+    </h1>
+    <form action="/adduser/{{#if user}}{{user.id}}{{/if}}" method="post">
+        <div>
+            <label for="username">username</label>
+            <input type="text" name="username" value="{{#if user}} {{user.username}} {{/if}}"/>
+        </div>
+        <div>
+            <label for="password">password</label>
+            <input type="text" name="password" value="{{#if user}} {{user.password}} {{/if}}"/>
+        <div>
+        <div>
+            <label for="avatar">avatar</label>
+            <input type="text" name="avatar" value="{{#if user}} {{user.avatar}} {{/if}}"/>
+        </div>
+        <input type="submit" value="{{#if user}}Update user{{else}}Add user{{/if}}"/>
+    </form>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<body>
+    <div class="container">
+
+    <h2>Gym Devices</h2>
+
+    <ul class="nav nav-pills sort-source" data-sort-id="portfolio" data-option-key="filter">
+        <li data-option-value="*"><a href="/gym/gymadd">Create</a></li>
+        <li data-option-value=".websites" class="active"><a href="/gym/gymread">Read</a></li>
+        <li data-option-value=".logos"><a href="/gym/gymupdate">Update</a></li>
+        <li data-option-value=".brands"><a href="/gym/gymdelete">Delete</a></li>
+    </ul>
+<br>
+</div>
+{{#if device}}
+    {{#each device}}
+        <div class="row">
+            <ul class="portfolio-list sort-destination" data-sort-id="portfolio">
+                <li class="col-md-3 col-sm-6 col-xs-12 isotope-item websites">
+                    <div class="portfolio-item img-thumbnail">
+                        <a href="/gym/gymupdate/{{this.id}}" class="thumb-info">
+                            <img alt="" class="img-responsive" src="{{this.image}}">
+                            <span class="thumb-info-title">
+                            <span class="thumb-info-inner">{{this.name}} </span>
+                            <span class="thumb-info-type">{{this.id}}</span>
+                            </span>
+                            <span class="thumb-info-action">
+                            <span title="Universal" class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
+                            </span>
+                        </a>
+                        <br>
+                        <button class="delete" data-id="{{this.id}}">Delete</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    {{/each}}
+    {{else}}
+        <h1> No data show </h1>
+{{/if}}
+</body>
+
+<script>
+
+  $(".delete").on("click",function (){
+    let id = this.dataset.id;
+
+  fetch(`/gym/gymdelete/${id}`,
+            {
+                method: "DELETE"
+            }    
+            ).then((data) => {
+                if(data.status == 200){
+                    $(this).parent().remove();
+                }
+            })
+    console.log(id);
+  })
+
+</script>
